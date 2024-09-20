@@ -1,0 +1,11 @@
+model_name: "VIT-GPT2"
+
+data_config:
+  base_dir: "/data/swbaek/Projects/Korean_IC_Competition/data"
+  jsonl_dir: "nikluge-gips-2023_JSONL"
+  reference_file: "nikluge-gips-2023-test.jsonl"
+  # reference_file: "nikluge-gips-2023-test-answer.jsonl"
+
+scoring_parameters:
+  candidate_path: "outputs/${model_name}/inference_output.jsonl"
+  mecab_dict_path: "/usr/local/lib/mecab/dic/mecab-ko-dic"

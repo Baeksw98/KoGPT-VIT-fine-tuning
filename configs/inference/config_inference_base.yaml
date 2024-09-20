@@ -1,0 +1,21 @@
+model_name: "VIT-GPT2"
+
+model_config:
+  vision_encoder: "google/vit-base-patch16-224-in21k" 
+  text_decoder: "skt/kogpt2-base-v2"
+
+data_config:
+  base_dir: "/data/swbaek/Projects/Korean_IC_Competition/data"
+  image_dir: "nikluge-gips-2023_image"
+  jsonl_dir: "nikluge-gips-2023_JSONL"
+  test_file: "nikluge-gips-2023-test.jsonl"
+
+inference_parameters:
+  device: "cuda"
+  model_ckpt_path: "outputs/${model_name}/best_model"
+  output_path: "outputs/${model_name}/inference_results.jsonl"
+  batch_size: 32
+  num_proc: 16
+  output_max_seq_len: 64
+  num_beams: 3
+  tokenizer: null

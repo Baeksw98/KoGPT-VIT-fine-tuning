@@ -1,0 +1,40 @@
+model_name: "VIT-GPT2-V1"
+
+model_config:
+  vision_encoder: "google/vit-base-patch16-224-in21k" 
+  text_decoder: "skt/kogpt2-base-v2"
+
+data_config:
+  base_dir: "/data/swbaek/Projects/Korean_IC_Competition/data"
+  image_dir: "nikluge-gips-2023_image"
+  jsonl_dir: "nikluge-gips-2023_JSONL"
+  train_file: "nikluge-gips-2023-train.jsonl"
+  val_file: "nikluge-gips-2023-dev.jsonl"
+
+common_parameters:
+  output_dir: "outputs/${model_name}"
+  model_path: null
+  batch_size: 32
+  valid_batch_size: 32
+  accumulate_grad_batches: 8
+  epochs: 100
+  max_learning_rate: 0.001
+  min_learning_rate: 0.00001
+  warmup_rate: 0.1
+  gpus: 8
+  logging_interval: 100
+  evaluate_interval: 1.0
+  seed: 42
+  num_proc: 32
+  lr_scheduler_type: "cosine_annealing_WR"
+
+  # Parameters for cosine annealing with warm restarts
+  cosine_annealing_WR:
+    T_0: 1  # Initial cycle length
+    T_mult: 2  # Multiplier for cycle length
+
+wandb_options:
+  wandb_run_name: null
+  wandb_entity: null
+  wandb_project: "${model_name}"
+  wandb_save_dir: "outputs/${model_name}/wandb_logs"
